@@ -169,10 +169,69 @@ font-size:11px;
 opacity:0.5;
 }
 
+     /* ================= 1 SECOND LOADER ================= */
+
+#page-loader{
+position:fixed;
+inset:0;
+width:100%;
+height:100%;
+background:#0f172a;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999999;
+transition:opacity .35s ease, visibility .35s ease;
+}
+
+#page-loader.hide{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
+
+.loader-spinner{
+width:58px;
+height:58px;
+border:5px solid rgba(255,215,0,.18);
+border-top:5px solid #FFD700;
+border-right:5px solid #22c55e;
+border-radius:50%;
+animation:loaderSpin .7s linear infinite;
+box-shadow:0 0 25px rgba(255,215,0,.20);
+}
+
+.loader-text{
+margin-top:15px;
+font-size:12px;
+font-weight:700;
+letter-spacing:3px;
+color:#FFD700;
+}
+
+@keyframes loaderSpin{
+to{
+transform:rotate(360deg);
+}
+}
+
 </style>
 </head>
 
 <body>
+
+     <!-- ================= 1 SECOND LOADER ================= -->
+
+<div id="page-loader">
+
+<div class="loader-spinner"></div>
+
+<div class="loader-text">
+LOADING...
+</div>
+
+</div>
 
 <div class="container">
 
@@ -245,6 +304,27 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1580783430095578&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+
+
+     <!-- ================= LOADER SCRIPT ================= -->
+
+<script>
+
+window.addEventListener("load",function(){
+
+setTimeout(function(){
+
+const loader=document.getElementById("page-loader");
+
+if(loader){
+loader.classList.add("hide");
+}
+
+},100);
+
+});
+
+</script>
 </body>
 </html>
 <script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="6d8e20e4-27fd-403b-9a88-00bd033223c9" data-app-host="app.netlify.com"></script>
